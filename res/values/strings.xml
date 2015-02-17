@@ -2,11 +2,13 @@
 <resources>
     <string name="app_name">GeoQuiz</string>
     <string name="menu_settings">Settings</string>
-    <string name="question_text">Constantinople is the largest city in Turkey.</string>
-    <string name="true_button">True</string>
-    <string name="false_button">False</string>
+    <string name="question_text">Константинополь самый большой город в Турции.</string>
+    <string name="true_button">Правда</string>
+    <string name="false_button">Лож</string>
     <string name="action_cat_male">Кот</string>
     <string name="action_cat_female">Кошка</string>
     <string name="action_kitten">Котенок</string>
     <string name="action_settings">Настройки</string>
+    <string name="correct_toast">Верно!</string>
+    <string name="incorrect_toast">Неверно!</string>
 </resources>
