@@ -5,10 +5,17 @@
     <string name="question_text">Константинополь самый большой город в Турции.</string>
     <string name="true_button">Правда</string>
     <string name="false_button">Ложь</string>
+    <string name="next_button">Далее</string>
     <string name="action_cat_male">Кот</string>
     <string name="action_cat_female">Кошка</string>
     <string name="action_kitten">Котенок</string>
     <string name="action_settings">Настройки</string>
     <string name="correct_toast">Верно!</string>
     <string name="incorrect_toast">Неверно!</string>
+
+    <string name="question_oceans">Тихий океан больше Атлантического</string>
+    <string name="question_mideast">Суэтский канал соединяет Красное море и Индийский океан</string>
+    <string name="question_africa">Исток реки Нилл нахоится в Египте</string>
+    <string name="question_americas">Река Амазонка самая длинная в мире</string>
+    <string name="question_asia">Байкал глубочайшее и древнейшее пресноводное озеро в мире</string>
 </resources>
