@@ -14,7 +14,7 @@ public class QuizActivity extends Activity {
     private Button mTrueButton;
     private Button mFalseButton;
     private Button mNextButton;
-    private TextView mQuestoinTextViev;
+    private TextView mQuestionTextView;
 
     private TrueFalse[] mQuestionBank = new TrueFalse[] {
             new TrueFalse(R.string.question_oceans, true),
@@ -29,7 +29,7 @@ public class QuizActivity extends Activity {
 
     private void updateQuestion() {
         int question = mQuestionBank[mCurrentIndex].getQuestion();
-        mQuestoinTextViev.setText(question);
+        mQuestionTextView.setText(question);
     }
 
     private void checkAnswer(boolean userPressedTrue) {
@@ -52,7 +52,7 @@ public class QuizActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
-        mQuestoinTextViev = (TextView)findViewById(R.id.question_text_view);
+        mQuestionTextView = (TextView)findViewById(R.id.question_text_view);
 
 
         mTrueButton = (Button) findViewById(R.id.true_button);
