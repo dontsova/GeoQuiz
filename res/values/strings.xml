@@ -12,6 +12,11 @@
     <string name="action_settings">Настройки</string>
     <string name="correct_toast">Верно!</string>
     <string name="incorrect_toast">Неверно!</string>
+    
+    <string name="cheat_button">Ответ</string>
+    <string name="warning_text">Ты уверен что хочешь увидить ответ?</string>
+    <string name="show_answer_button">Показать ответ</string>
+    <string name="judgement_toast">Подглядывать стыдно</string>
 
     <string name="question_oceans">Тихий океан больше Атлантического</string>
     <string name="question_mideast">Суэтский канал соединяет Красное море и Индийский океан</string>
