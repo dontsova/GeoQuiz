@@ -16,38 +16,41 @@ public class QuizActivity extends Activity {
     private static final String TAG = "QuizActivity";
     private static final String KEY_INDEX = "index";
 
-    private Button mTrueButton;
-    private Button mFalseButton;
-    private Button mNextButton;
-    private Button mCheatButton;
+    Button mTrueButton;
+    Button mFalseButton;
+    Button mNextButton;
+    Button mCheatButton;
 
-    private boolean mIsCheater;
+    boolean mIsCheater;
 
-    private TextView mQuestionTextView;
+    TextView mQuestionTextView;
 
-    private TrueFalse[] mQuestionBank = new TrueFalse[] {
+    TrueFalse[] mAnswerKey = new TrueFalse[] {
             new TrueFalse(R.string.question_oceans, true),
             new TrueFalse(R.string.question_mideast, false),
             new TrueFalse(R.string.question_africa, false),
             new TrueFalse(R.string.question_americas, true),
-            new TrueFalse(R.string.question_asia, true),
+            new TrueFalse(R.string.question_asia, true)
     };
 
-    private int mCurrentIndex = 0;
-
+    int mCurrentIndex = 0;
 
     private void updateQuestion() {
-        int question = mQuestionBank[mCurrentIndex].getQuestion();
+        int question = mAnswerKey[mCurrentIndex].getQuestion();
         mQuestionTextView.setText(question);
     }
 
     private void checkAnswer(boolean userPressedTrue) {
-        boolean answerIsTrue = mQuestionBank[mCurrentIndex].isTrueQuestion();
+        boolean answerIsTrue = mAnswerKey[mCurrentIndex].isTrueQuestion();
 
         int messageResId = 0;
 
-        if (mIsCheater){
-            messageResId = R.string.judgement_toast;
+        if (mIsCheater) {
+            if (userPressedTrue == answerIsTrue) {
+                messageResId = R.string.judgement_toast;
+            } else {
+                messageResId = R.string.incorrect_judgement_toast;
+            }
         } else {
             if (userPressedTrue == answerIsTrue) {
                 messageResId = R.string.correct_toast;
@@ -60,17 +63,17 @@ public class QuizActivity extends Activity {
                 .show();
     }
 
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate(Bundle) called");
+        Log.d(TAG, "onCreate() called");
         setContentView(R.layout.activity_quiz);
+
+        mIsCheater = false;
 
         mQuestionTextView = (TextView)findViewById(R.id.question_text_view);
 
-
-        mTrueButton = (Button) findViewById(R.id.true_button);
+        mTrueButton = (Button)findViewById(R.id.true_button);
         mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +81,7 @@ public class QuizActivity extends Activity {
             }
         });
 
-        mFalseButton = (Button) findViewById(R.id.false_button);
+        mFalseButton = (Button)findViewById(R.id.false_button);
         mFalseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,28 +89,31 @@ public class QuizActivity extends Activity {
             }
         });
 
-        mNextButton = (Button) findViewById(R.id.next_button);
+        mNextButton = (Button)findViewById(R.id.next_button);
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+                mCurrentIndex = (mCurrentIndex + 1) % mAnswerKey.length;
                 mIsCheater = false;
                 updateQuestion();
             }
         });
 
-        mCheatButton = (Button) findViewById(R.id.cheat_button);
+        mCheatButton = (Button)findViewById(R.id.cheat_button);
         mCheatButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+                Log.d(TAG, "cheat button clicked");
                 Intent i = new Intent(QuizActivity.this, CheatActivity.class);
-                boolean answerIsTrue = mQuestionBank[mCurrentIndex].isTrueQuestion();
+                Log.d(TAG, "intent created");
+                boolean answerIsTrue = mAnswerKey[mCurrentIndex].isTrueQuestion();
                 i.putExtra(CheatActivity.EXTRA_ANSWER_IS_TRUE, answerIsTrue);
                 startActivityForResult(i, 0);
             }
         });
 
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
         }
 
@@ -115,11 +121,8 @@ public class QuizActivity extends Activity {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (data == null){
-            return;
-        }
-        mIsCheater = getIntent().getBooleanExtra(CheatActivity.EXTRA_ANSWER_SHOWN, false);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        mIsCheater = data.getBooleanExtra(CheatActivity.EXTRA_ANSWER_SHOWN, false);
     }
 
     @Override
@@ -132,35 +135,38 @@ public class QuizActivity extends Activity {
     @Override
     public void onStart() {
         super.onStart();
-        Log.d(TAG, "onStart() called");
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause() called");
+        Log.i(TAG, "onStart");
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Log.d(TAG, "onResume() called");
+        Log.i(TAG, "onResume");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.i(TAG, "onPause");
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        Log.d(TAG, "onStop() called");
-    }
-
-    public void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy() called");
+        Log.i(TAG, "onStop");
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i(TAG, "onDestroy");
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.activity_quiz, menu);
         return true;
     }
+
 }

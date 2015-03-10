@@ -17,6 +17,7 @@
     <string name="warning_text">Ты уверен что хочешь увидить ответ?</string>
     <string name="show_answer_button">Показать ответ</string>
     <string name="judgement_toast">Подглядывать стыдно</string>
+    <string name="incorrect_judgement_toast">You do not cheat very well. \nStick to guessing.</string>
 
     <string name="question_oceans">Тихий океан больше Атлантического</string>
     <string name="question_mideast">Суэтский канал соединяет Красное море и Индийский океан</string>

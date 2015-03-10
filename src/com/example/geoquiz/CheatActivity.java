@@ -16,8 +16,8 @@ public class CheatActivity extends Activity {
     public static final String EXTRA_ANSWER_SHOWN = "com.example.geoquiz.answer_shown";
 
     private Button mShowAnswerButton;
-    private boolean mAnswerIsTrue;
     private TextView mAnswerTextView;
+    private boolean mAnswerIsTrue;
 
     private void setAnswerShownResult(boolean isAnswerShown) {
         Intent data = new Intent();
@@ -31,6 +31,10 @@ public class CheatActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cheat_layout);
         setAnswerShownResult(false);
+
+        if (savedInstanceState == null){
+            setAnswerShownResult(false);
+        }
 
         mAnswerIsTrue = getIntent().getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false);
 
